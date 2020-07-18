@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Home Page</title>
+</head>
+<body>
+<h1>Welcome to Home Page of SalesForce</h1>
+<table border="1">
+      <th style="font-weight: bold">ID:</th>
+      <th style="font-weight: bold">Products</th>
+          <th style="font-weight: bold">Price</th>
+          <th style="font-weight: bold">Category</th>
+{% for i in product%}
+    <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.price}}</td>
+        <td>{{i.category}}</td>
+{% endfor %}
+</tr>
+</table>
+
+{% if product.has_other_pages %}
+  <ul class="pagination">
+    {% if product.has_previous %}
+      <li><a href="?page={{ product.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in product.paginator.page_range %}
+      {% if product.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if product.has_next %}
+      <li><a href="?page={{ product.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+</body>
+</html>

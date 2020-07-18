@@ -1,0 +1,108 @@
+
+{% include 'salesforce/navbar.html' %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+
+{% if request.user.is_staff %}
+<div class="row">
+   <div class="col-sm-2">
+    <div class="card">
+  <h5 class="card-header bg-primary text-white">Total Customer</h5>
+        <div class="card-body card-sm">
+            <h5 class="card-title"><center>{{total_customer}}</center></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="card">
+  <h5 class="card-header bg-secondary text-white">Total Order</h5>
+        <div class="card-body card-sm">
+            <h5 class="card-title"><center>{{total_order}}</center></h5>
+      </div>
+    </div>
+  </div>
+     <div class="col-sm-2">
+    <div class="card">
+  <h5 class="card-header bg-success text-white">Delivered</h5>
+        <div class="card-body card-sm">
+            <h5 class="card-title"><center>{{delivered}}</center></h5>
+      </div>
+    </div>
+  </div>
+     <div class="col-sm-2">
+    <div class="card">
+  <h5 class="card-header bg-danger text-white">Pending</h5>
+        <div class="card-body card-sm">
+            <h5 class="card-title"><center>{{pending}}</center></h5>
+      </div>
+    </div>
+  </div>
+     <div class="col-sm-2">
+    <div class="card">
+  <h5 class="card-header bg-warning text-white">OutforDilevery</h5>
+        <div class="card-body card-sm">
+        <h5 class="card-title" style="size: 20px"><center>{{ofd}}</center></h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="row">
+    <div class="col">
+        <div class=" card card-body">
+            <form method="get">
+                {{Cus_Filter.form}}
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<table border="1">
+
+    <th style="font-weight: bold">P ID:</th>
+    <th style="font-weight: bold">O ID:</th>
+    <th style="font-weight: bold">Products</th>
+    <th style="font-weight: bold">Products Category</th>
+    <th style="font-weight: bold">Products Price</th>
+    <th style="font-weight: bold">Customer Name</th>
+    <th style="font-weight: bold">Customer Phone</th>
+    <th style="font-weight: bold">Customer Email</th>
+    <th style="font-weight: bold">Date</th>
+    <th style="font-weight: bold">Orders Status</th>
+    <th colspan="2">Actions</th>
+
+
+{% for i in order%}
+    <tr>
+                <td>{{i.product.id}}</td>
+        <td>{{i.id}}</td>
+                <td>{{i.product}}</td>
+                <td>{{i.product.category}}</td>
+                <td>{{i.product.price}}$</td>
+                <td>{{i.customer}}</td>
+                <td>{{i.customer.phone}}</td>
+                <td>{{i.customer.email}}</td>
+                <td>{{i.date_created}}</td>
+                <td>{{i.status}}</td>
+<td>   <a class="btn btn-success btn-sm" href="{% url 'update_order' i.id %}" >Update</a>
+</td>
+<td>   <a class="btn btn-danger btn-sm" href="{% url 'delete_order' i.id %}" >Delete</a>
+</td>
+        {% endfor %}
+{% endif %}
+</tr>
+</table>
+</div>
+</body>
+</html>
+{% endblock %}

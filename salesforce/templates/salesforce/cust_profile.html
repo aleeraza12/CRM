@@ -1,0 +1,15 @@
+{% include 'salesforce/navbar.html' %}
+{% block content %}
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>{{request.user}}'s Profile</title>
+<div class="card">
+    <span class="border border-primary">
+<img class="profile-pic rounded-circle" src="{{request.user.customer.profile_pic.url}}" alt="{{request.user}} Profile" style="width:100px;height:120px"></div>
+</span>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="btn btn-primary" type="submit" name="Update Information">
+
+</form>
+{% endblock %}

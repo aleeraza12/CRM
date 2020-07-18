@@ -1,0 +1,21 @@
+{% include 'salesforce/navbar.html' %}
+{% block content %}
+
+<div style="display: inline">
+<table border=1>
+
+      <th style="font-weight: bold">Order</th>
+      <th style="font-weight: bold">Customer Name</th>
+          <th style="font-weight: bold">Phone</th>
+          <th style="font-weight: bold">Email</th>
+{% for customers in customer%}
+    <tr>
+        <td><a href="{% url 'customer' customers.id %}">{{customers.id}}</a></td>
+        <td>{{customers.name}}</td>
+        <td>{{customers.phone}}</td>
+        <td>{{customers.email}}</td>
+        {% endfor %}
+{% endblock %}
+</tr>
+</table>
+       </div>

@@ -1,0 +1,14 @@
+{% include 'salesforce/navbar.html' %}
+{% block content %}
+<!------ Include the above in your HEAD tag ---------->
+
+<form method="POST"style="margin-left:200px" border="1">
+<fieldset>
+{% csrf_token %}
+<!-- Form Name -->
+<legend>ADD TAGS</legend>
+{{form.name}}
+    <input class="btn btn-primary" type="submit" value="Add Tags">
+</fieldset>
+</form>
+    {% endblock %}
